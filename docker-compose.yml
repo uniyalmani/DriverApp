@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  mysql_db:
+    image: mysql:5.7
+    container_name: mysql_db
+    hostname: mysql_db
+    environment:
+      - MYSQL_ROOT_HOST="%"
+      - MYSQL_ROOT_PASSWORD=fynd123
+      - MYSQL_DATABASE=fynd_acad
+      - MYSQL_USER=fynd_acad
+      - MYSQL_PASSWORD=fynd123 
+    ports:
+      - "3305:3306"
+    volumes:
+      - /home/nitin/fynd_acad/docker-data-location:/var/lib/mysql 
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+ 
+    environment:
+      - SECRET_KEY="qwertyuiopasdfghjklzxcvbnmgenratedfjsdfjs"
+      - ALGORITHM="HS256"
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - MYSQL_ROOT_HOST=mysql_db
+      - MYSQL_PORT=3306
+      - MYSQL_ROOT_PASSWORD=fynd123
+      - MYSQL_DATABASE=fynd_acad
+      - MYSQL_USER=fynd_acad
+      - MYSQL_PASSWORD=fynd123
+      - LOCATION_API_KEY=5b3ce3597851110001cf624897f8651b9f8e488ba804216a36cc247a
+
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mysql_db
+    ports:  
+      - "8000:8000"
+      - "5678:5678"
+
