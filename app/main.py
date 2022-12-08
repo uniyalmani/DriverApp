@@ -1,7 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from app.controllers.database_initializer import *
-
+from app.routes import auth, location
 
 app = FastAPI()
 
@@ -14,9 +14,11 @@ app.add_middleware(
 )
 
 
-
+app.include_router(auth.router)
+app.include_router(location.router)
 
 @app.get("/")
 def read_root():
 
     return {"Hello": "World"}
+

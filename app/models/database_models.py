@@ -12,6 +12,9 @@ class Users(SQLModel, table=True):
     id: int = Field(primary_key=True)
     name: str
     email: str = Field(sa_column=Column("email", String(40), unique=True))
+    mobile_number: str
+    longitude: float = Field(default=0.0)
+    latitude: float = Field(default=0.0)
     hashed_password: str
     is_varified: bool = Field(default=False)
     is_free: bool = Field(default=True)

@@ -14,7 +14,7 @@ services:
     ports:
       - "3305:3306"
     volumes:
-      - /home/nitin/fynd_acad/docker-data-location:/var/lib/mysql 
+      - /home/nitin/fynd_acad/docker-data-location2:/var/lib/mysql 
 
 
   app:

@@ -1,5 +1,6 @@
 fastapi
 uvicorn 
+WebSockets
 gunicorn
 psycopg2-binary
 sqlmodel
